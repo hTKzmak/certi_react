@@ -1,0 +1,17 @@
+header {
+    position: relative;
+    
+    background-color: #fff;
+    padding: 30px;
+    
+    -webkit-box-shadow: 0px 6px 15px -3px rgba(34, 60, 80, 0.15);
+    -moz-box-shadow: 0px 6px 15px -3px rgba(34, 60, 80, 0.15);
+    box-shadow: 0px 6px 15px -3px rgba(34, 60, 80, 0.15);
+    
+    z-index: 1000;
+    
+    h1 {
+        color: #000000dd;
+        font-size: 23px;
+    }
+}

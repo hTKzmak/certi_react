@@ -1,0 +1,39 @@
+@mixin hoverBtnStyle($bgc, $color){
+    &:hover {
+        background-color: $bgc;
+        color: $color;
+    }
+}
+
+@mixin mediaColor($bgc, $color){
+    background-color: $bgc;
+    color: $color;
+}
+
+button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #e9e9e9;
+    color: #00000066;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.base{
+    @include hoverBtnStyle(#2957ff, #fff);
+    
+    @media screen and (max-width: 1000px) {
+        @include mediaColor(#2957ff, #fff);
+    }
+}
+
+.exit{
+    @include hoverBtnStyle(#d8d8d8, #000);
+
+    @media screen and (max-width: 1000px) {
+        @include mediaColor(#d8d8d8, #000);
+    }
+}
