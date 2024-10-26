@@ -4,10 +4,9 @@ import ButtonElem from '../UI/ButtonElem';
 
 function CertItem({ id, name, price, summa, primarykey, tablename }) {
 
+    // функция по хранению необходимых данных о товаре в LocalStorage
     const choosenCert = () => {
         window.localStorage.setItem('choosenCert',  JSON.stringify({id: id, name: name, price: price, summa: summa, primarykey: primarykey, tablename: tablename}))
-
-        console.log(localStorage.getItem('choosenCert'))
     }
 
     return (

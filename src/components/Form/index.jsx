@@ -7,6 +7,7 @@ import { Context } from '../../context/Context';
 
 function Form() {
 
+    // получаем функцию по отправке данных
     const { getGoodList } = useContext(Context)
 
     // получение данных о выбранном сертификате
@@ -38,6 +39,7 @@ function Form() {
 
         if (values.name && values.phone && values.email) {
 
+            // все необходимые данные для отправки на сервер
             const payload = {
                 ApiKey: "011ba11bdcad4fa396660c2ec447ef14",
                 MethodName: "OSSale",
@@ -57,6 +59,7 @@ function Form() {
             // запускаем запрос к API 
             getGoodList(payload, false);
 
+            // перекидывает нас на страницу payment (страница-заглушка)
             navigate("/payment")
         }
     }
