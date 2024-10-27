@@ -17,7 +17,9 @@ function HomePage({ certData, visibility }) {
     // запускаем запрос к API 
     useEffect(() => {
         sendApiRequest(payload, true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
 
     return (
         <main className="container">

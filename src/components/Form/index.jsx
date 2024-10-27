@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import style from './Form.module.scss'
 import ButtonElem from '../UI/ButtonElem'
 import { useContext, useState } from 'react';
-import PhoneInput from 'react-phone-number-input/input'
 import { Context } from '../../context/Context';
+import PhoneInput from 'react-phone-input-2'
 
 function Form() {
 
@@ -16,9 +16,6 @@ function Form() {
 
     // навигация
     const navigate = useNavigate();
-
-    // значение номера телефона (используется из-за библиотеки)
-    const [phoneVal, setPhoneVal] = useState('');
 
     // значения данных
     const [values, setValues] = useState({
@@ -37,9 +34,7 @@ function Form() {
         // проверка полей ввода
         setValid(true)
 
-        console.log(values)
-
-        if (values.name && (values.phone && phoneVal.length === 12) && values.email) {
+        if (values.name && (values.phone && values.phone.length === 11) && values.email) {
             // все необходимые данные для отправки на сервер
             const payload = {
                 MethodName: "OSSale",
@@ -75,14 +70,12 @@ function Form() {
         }));
     };
 
-    // отслеживание изменений input'а phone
+    // отслеживание изменений для input phone (из-за библиотеки)
     const handlePhoneChange = (event) => {
         setValues((values) => ({
             ...values,
-            phone: event
+            phone: event,
         }));
-
-        setPhoneVal(event)
     };
 
     return (
@@ -91,18 +84,18 @@ function Form() {
 
                 <p><b>Вы выбрали товар:</b> {JSONData.name || 'товар отсутствует'}</p>
 
-                <p>
+                <label>
                     ФИО
                     <input className={valid && !values.name ? style.error : ''} type="text" name="name" id="name" placeholder='ФИО' value={values.name} onChange={handleInputChange} />
-                </p>
-                <p>
+                </label>
+                <label>
                     Телефон
-                    <PhoneInput className={valid && phoneVal.length < 12 ? style.error : ''} type="tel" name="phone" id="phone" placeholder='Телефон' value={phoneVal} onChange={handlePhoneChange} international withCountryCallingCode={true} country="RU" maxLength={16} />
-                </p>
-                <p>
+                    <PhoneInput inputClass={valid && values.phone.length < 11 ? style.error : ''} specialLabel={''} type="tel" name="phone" placeholder={'+7 (999) 999-99-99'} countryCodeEditable={false} id="phone" country={'ru'} value={values.phone} onChange={handlePhoneChange} />
+                </label>
+                <label>
                     Электронная почта
-                    <input className={valid && !values.email ? style.error : ''} type="email" name="email" id="email" placeholder='Электронная почта' value={values.email} onChange={handleInputChange} />
-                </p>
+                    <input className={valid && !values.email ? style.error : ''} type="email" name="email" id="email" placeholder='example@gmail.com' value={values.email} onChange={handleInputChange} />
+                </label>
 
                 <div className={style.options}>
                     <ButtonElem action={() => navigate("/")} title={'Назад'} />
