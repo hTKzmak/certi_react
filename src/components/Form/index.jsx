@@ -8,7 +8,7 @@ import { Context } from '../../context/Context';
 function Form() {
 
     // получаем функцию по отправке данных
-    const { getGoodList } = useContext(Context)
+    const { sendApiRequest } = useContext(Context)
 
     // получение данных о выбранном сертификате
     let localStorageData = localStorage.getItem('choosenCert')
@@ -37,11 +37,11 @@ function Form() {
         // проверка полей ввода
         setValid(true)
 
-        if (values.name && values.phone && values.email) {
+        console.log(values)
 
+        if (values.name && (values.phone && phoneVal.length === 12) && values.email) {
             // все необходимые данные для отправки на сервер
             const payload = {
-                ApiKey: "011ba11bdcad4fa396660c2ec447ef14",
                 MethodName: "OSSale",
                 isMob: 0,
                 Id: JSONData.id,
@@ -57,7 +57,7 @@ function Form() {
             };
 
             // запускаем запрос к API 
-            getGoodList(payload, false);
+            sendApiRequest(payload, false);
 
             // перекидывает нас на страницу payment (страница-заглушка)
             navigate("/payment")
@@ -72,8 +72,17 @@ function Form() {
         setValues((values) => ({
             ...values,
             [name]: value,
-            phone: phoneVal
         }));
+    };
+
+    // отслеживание изменений input'а phone
+    const handlePhoneChange = (event) => {
+        setValues((values) => ({
+            ...values,
+            phone: event
+        }));
+
+        setPhoneVal(event)
     };
 
     return (
@@ -88,7 +97,7 @@ function Form() {
                 </p>
                 <p>
                     Телефон
-                    <PhoneInput className={valid && !phoneVal ? style.error : ''} type="tel" name="phone" id="phone" placeholder='Телефон' value={phoneVal} onChange={setPhoneVal} international withCountryCallingCode={true} country="RU" maxLength={16}/>
+                    <PhoneInput className={valid && phoneVal.length < 12 ? style.error : ''} type="tel" name="phone" id="phone" placeholder='Телефон' value={phoneVal} onChange={handlePhoneChange} international withCountryCallingCode={true} country="RU" maxLength={16} />
                 </p>
                 <p>
                     Электронная почта
@@ -96,8 +105,8 @@ function Form() {
                 </p>
 
                 <div className={style.options}>
-                    <ButtonElem hoverType={'exit'} action={() => navigate("/")} title={'Назад'} />
-                    <ButtonElem title={'Оплатить'} type={'submit'} disabled={localStorageData ? false : true} />
+                    <ButtonElem action={() => navigate("/")} title={'Назад'} />
+                    <ButtonElem buttonStyle={localStorageData ? 'submit' : ''} title={'Оплатить'} type={'submit'} disabled={localStorageData ? false : true} />
                 </div>
             </form>
         </div>

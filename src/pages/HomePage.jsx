@@ -6,18 +6,17 @@ import { Context } from "../context/Context";
 function HomePage({ certData, visibility }) {
 
     // получаем функцию по отправке данных
-    const { getGoodList } = useContext(Context)
+    const { sendApiRequest } = useContext(Context)
 
     // все необходимые данные для получения data с сервера
     const payload = {
-        ApiKey: "011ba11bdcad4fa396660c2ec447ef14",
         MethodName: "OSGetGoodList",
         isMob: 0,
     };
 
     // запускаем запрос к API 
     useEffect(() => {
-        getGoodList(payload, true);
+        sendApiRequest(payload, true);
     }, [])
 
     return (

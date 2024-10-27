@@ -19,10 +19,10 @@ function App() {
   // ссылка на API
   const URL = 'http://127.0.0.1:5000/proxy';
 
-  // Функция для получения списка товаров через прокси CORS Anywhere
-  async function getGoodList(payload, usePreolader) {
+  // Функция для отправки запросов к Api
+  async function sendApiRequest(payload, usePreolader) {
 
-    console.log("Загрузка контента..."); // Сообщение о начале загрузки
+    console.log("Загрузка данных..."); // Сообщение о начале загрузки
 
     if(usePreolader){
       setVisibility('flex')
@@ -34,7 +34,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({ApiKey: "011ba11bdcad4fa396660c2ec447ef14", ...payload})
       });
 
       const result = await response.json();
@@ -55,7 +55,7 @@ function App() {
   }
 
   return (
-    <Context.Provider value={{getGoodList}}>
+    <Context.Provider value={{sendApiRequest}}>
       <div>
         <Header />
 
