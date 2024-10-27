@@ -15,7 +15,7 @@ function CertItem({ id, name, price, summa, primarykey, tablename }) {
             <h5>{Math.round(price)} ₽</h5>
 
             <Link to="/form">
-                <ButtonElem buttonStyle={'submit'} action={() => choosenCert()} title={'Купить'}/>
+                <ButtonElem buttonStyle={'submit'} action={() => choosenCert()} title={'Оформить'}/>
             </Link>
         </div>
     )

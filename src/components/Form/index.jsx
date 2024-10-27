@@ -45,7 +45,7 @@ function Form() {
                 Price: JSONData.price,
                 Summa: JSONData.summa,
                 ClientName: values.name,
-                Phone: values.phone,
+                Phone: values.phone.slice(1),
                 Email: values.email,
                 PaymentTypeId: 2,
                 UseDelivery: 0,
