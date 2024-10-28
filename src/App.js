@@ -17,7 +17,7 @@ function App() {
   const [visibility, setVisibility] = useState('flex')
 
   // ссылка на API
-  const URL = 'http://127.0.0.1:5000/proxy';
+  const URL = 'https://htkzmak.ru/proxy';
 
   // Функция для отправки запросов к Api
   async function sendApiRequest(payload, usePreolader) {
