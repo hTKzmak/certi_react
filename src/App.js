@@ -16,7 +16,7 @@ function App() {
   // отображение экрана загрузки
   const [visibility, setVisibility] = useState('flex')
 
-  // ссылка на API
+  // ссылка на API (используется собственный proxy для обхода блокировки CORS)
   const URL = 'https://htkzmak.ru/proxy';
 
   // Функция для отправки запросов к Api
